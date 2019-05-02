@@ -332,12 +332,12 @@
       
         
           
-            <p>对于在线上服务器排查错误，学会分析log就变得异常重要，<code>grep</code>命令具有非常强大的文本过滤能力，是一个很好的日志过滤工具。</p>
+            <h3 id="什么是grep"><a href="#什么是grep" class="headerlink" title="什么是grep"></a>什么是<code>grep</code></h3><p>对于在线上服务器排查错误，学会分析log就变得异常重要，<code>grep</code>命令具有非常强大的文本过滤能力，是一个很好的日志过滤工具。</p>
 <blockquote>
 <p>首先需要注意的是， <code>grep</code>命令是按<strong>行</strong>过滤日志的，格式为<code>grep [options] pattern file</code>，options支持像-A，-B，-e，-E，-f，-i，-n，-v，-r等，pattern支持常见的正则匹配，以下对其进行详细介绍。</p>
 </blockquote>
-<ul>
-<li><code>grep -A</code></li>
+<h3 id="grep参数解析"><a href="#grep参数解析" class="headerlink" title="grep参数解析"></a><code>grep</code>参数解析</h3><ul>
+<li><h4 id="grep-A"><a href="#grep-A" class="headerlink" title="grep -A"></a><code>grep -A</code></h4></li>
 </ul>
 <blockquote>
 <p>显示目标行及之后<code>(after)</code>的n行，如果有多个匹配结果，则以<code>--</code>分割</p>
@@ -351,28 +351,28 @@
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  grep -A 2 <span class="string">'java'</span> foo.txt</span><br><span class="line">java python</span><br><span class="line">C<span class="comment"># bash</span></span><br><span class="line">groovy</span><br><span class="line">--</span><br><span class="line">javascript</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>grep -B</code></li>
+<li><h4 id="grep-B"><a href="#grep-B" class="headerlink" title="grep -B"></a><code>grep -B</code></h4></li>
 </ul>
 <blockquote>
 <p>显示目标行及之前<code>(before)</code>的n行，如果有多个匹配结果，则以<code>--</code>分割</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  grep -B 2 <span class="string">'java'</span> foo.txt</span><br><span class="line">java python</span><br><span class="line">--</span><br><span class="line">groovy</span><br><span class="line">go scala</span><br><span class="line">javascript</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>grep -i</code></li>
+<li><h4 id="grep-i"><a href="#grep-i" class="headerlink" title="grep -i"></a><code>grep -i</code></h4></li>
 </ul>
 <blockquote>
 <p>匹配时不分大小写</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  grep -i <span class="string">'c#'</span> foo.txt</span><br><span class="line">C<span class="comment"># bash</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>grep -e</code></li>
+<li><h4 id="grep-e"><a href="#grep-e" class="headerlink" title="grep -e"></a><code>grep -e</code></h4></li>
 </ul>
 <blockquote>
 <p>可以利用多个条件进行或匹配</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  grep -e <span class="string">'go'</span> -e <span class="string">'bash'</span> foo.txt</span><br><span class="line">C<span class="comment"># bash</span></span><br><span class="line">go scala</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>grep -E</code></li>
+<li><h4 id="grep-E"><a href="#grep-E" class="headerlink" title="grep -E"></a><code>grep -E</code></h4></li>
 </ul>
 <blockquote>
 <p>可以看作是<code>grep -e</code>的简单版，对多个条件进行或匹配，直接以<code>|</code>分隔</p>
@@ -383,55 +383,55 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  grep <span class="string">'go.*scala'</span> foo.txt</span><br><span class="line">go scala</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>grep -f</code></li>
+<li><h4 id="grep-f"><a href="#grep-f" class="headerlink" title="grep -f"></a><code>grep -f</code></h4></li>
 </ul>
 <blockquote>
 <p><code>grep -f reg.txt foo.txt</code>为以<code>reg.txt</code>定义的规则过滤<code>foo.txt</code>里的内容</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  cat reg.txt</span><br><span class="line">java</span><br><span class="line">gr.*vy</span><br><span class="line">➜  grep -f reg.txt foo.txt</span><br><span class="line">java python</span><br><span class="line">groovy</span><br><span class="line">javascript</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>grep -n</code></li>
+<li><h4 id="grep-n"><a href="#grep-n" class="headerlink" title="grep -n"></a><code>grep -n</code></h4></li>
 </ul>
 <blockquote>
 <p>显示过滤行的行数</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  cat foo.txt</span><br><span class="line">java python</span><br><span class="line">C<span class="comment"># bash</span></span><br><span class="line">groovy</span><br><span class="line">go scala</span><br><span class="line">javascript</span><br><span class="line"></span><br><span class="line">➜  grep -f reg.txt -n foo.txt</span><br><span class="line">1:java python</span><br><span class="line">3:groovy</span><br><span class="line">5:javascript</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>grep -v</code></li>
+<li><h4 id="grep-v"><a href="#grep-v" class="headerlink" title="grep -v"></a><code>grep -v</code></h4></li>
 </ul>
 <blockquote>
 <p>显示未匹配到的行。以下显示未匹配到的行，并显示行号</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  grep -f reg.txt -n -v foo.txt</span><br><span class="line">2:C<span class="comment"># bash</span></span><br><span class="line">4:go scala</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>grep -r</code></li>
+<li><h4 id="grep-r"><a href="#grep-r" class="headerlink" title="grep -r"></a><code>grep -r</code></h4></li>
 </ul>
 <blockquote>
 <p>之前介绍的<code>grep</code>命令都是对某一特定文本进行过滤，如果想对某一目录下的所有文件都进行过滤，那么可以用此命令。</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  ls unix</span><br><span class="line">foo.txt reg.txt</span><br><span class="line">➜  grep <span class="string">'java'</span> -r -n unix</span><br><span class="line">unix/foo.txt:1:java python</span><br><span class="line">unix/foo.txt:5:javascript</span><br><span class="line">unix/reg.txt:1:java</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>grep -L</code></li>
+<li><h4 id="grep-L"><a href="#grep-L" class="headerlink" title="grep -L"></a><code>grep -L</code></h4></li>
 </ul>
 <blockquote>
 <p>过滤文件内容不符合特定<code>pattern</code>的所有文件名称，可与<code>-r</code>命令一起使用</p>
 </blockquote>
 <ul>
-<li><code>grep -l</code></li>
+<li><h4 id="grep-l"><a href="#grep-l" class="headerlink" title="grep -l"></a><code>grep -l</code></h4></li>
 </ul>
 <blockquote>
 <p>过滤文件内容符合特定<code>pattern</code>的所有文件名称，可以<code>-r</code>命令一起使用</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  ls unix</span><br><span class="line">foo.txt reg.txt</span><br><span class="line">➜  grep -Lr <span class="string">'javascript'</span> unix</span><br><span class="line">unix/reg.txt</span><br><span class="line">➜  grep -lr <span class="string">'javascript'</span> unix</span><br><span class="line">unix/foo.txt</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>grep -w</code></li>
+<li><h4 id="grep-w"><a href="#grep-w" class="headerlink" title="grep -w"></a><code>grep -w</code></h4></li>
 </ul>
 <blockquote>
 <p>过滤精确匹配整行的结果，如果未精确匹配，则过滤结果为空</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜  cat foo.txt</span><br><span class="line">java python</span><br><span class="line">C<span class="comment"># bash</span></span><br><span class="line">groovy</span><br><span class="line">go scala</span><br><span class="line">javascript</span><br><span class="line">➜  grep -w <span class="string">'java python'</span> foo.txt</span><br><span class="line">java python</span><br><span class="line">➜  grep -w <span class="string">'java pytho'</span> foo.txt</span><br><span class="line">&lt;empty result&gt;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>grep -c</code></li>
+<li><h4 id="grep-c"><a href="#grep-c" class="headerlink" title="grep -c"></a><code>grep -c</code></h4></li>
 </ul>
 <blockquote>
 <p>统计过滤的行数，注意是行哦</p>
